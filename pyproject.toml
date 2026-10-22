@@ -1,7 +1,7 @@
 [project]
-name = "genpact"
+name = "hebrew-invoice-to-json"
 version = "0.1.0"
-description = "fastAPI -> tesseract OCR for uploading receipts images into json files"
+description = "Hebrew invoice images to validated JSON: OpenCV preprocessing, Tesseract OCR and Claude structured extraction behind a FastAPI service"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

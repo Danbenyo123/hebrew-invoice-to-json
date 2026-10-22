@@ -110,7 +110,14 @@ The project was built step by step, testing each stage on real Hebrew invoices a
 2. **Tables and lines (Aug 24–25).** Table borders were being read as characters. Separating horizontal and vertical lines from text with morphological operations led to the `remove_lines` step. Boxing each word showed that Tesseract's reading order scrambles right-to-left table rows.
 3. **Image quality (Aug 26).** Compared resizing and threshold settings. Tested denoising on a noised copy of the invoice. Built skew estimation from the angles of text lines, ending with a single preprocessing workflow.
 4. **Right-to-left layout (Aug 29).** Rebuilt lines from word coordinates. Grouping words by baseline and mirroring x positions gives text in Hebrew reading order with the columns kept, which helps the LLM tell labels from amounts. A real-world invoice with a colored header showed that light-on-dark text needed special handling.
-5. **LLM extraction and validation (Sep 9–13).** Added the Claude extraction step with a Pydantic schema, then required-field and arithmetic checks with a feedback retry. A "no price" variant and a "must be error" variant check that missing data produces an honest failure instead of an invented value. Added the FastAPI endpoint and upload page.
+5. **LLM extraction and validation (Sep 9–13).** The first version was a script: it read an image path, ran OCR, and asked Claude to fill a strict schema where the date, every total and each product ID were required. Several lessons reshaped it:
+   - *Required fields invite guessing.* Forcing the model to produce a value pushes it to invent one when the page doesn't show it. The schema became nullable, and "required" moved into code (`check_required`), which can fail honestly or retry with feedback.
+   - *Real values are messy.* Amounts arrive as `₪1,132.00` and dates in several formats, so value parsers (`CleanPrice`, `FlexibleDate`) clean them before validation. An early date format with a typo (`%d,%m,%y`) was fixed along the way.
+   - *Invoices have two parties.* The single `Customer` model became a shared `Party` model for both supplier and customer. Per-item and whole-invoice discounts were added.
+   - *Large invoices need room.* The output token limit was raised from 1,024 to 8,192 so long line-item tables aren't cut off.
+   - *Deliberately broken inputs.* A "no price" variant and a "must be error" variant check that missing data produces an honest failure instead of an invented value.
+
+   The script then became a service: images are processed as bytes in memory behind a FastAPI endpoint, with an upload page.
 6. **Dataset and evaluation (Oct 5–15).** Collected 12 invoices from different systems and layouts (printed receipts, generated PDFs, colored templates, a phone photo). Started hand-labeling expected results and building a per-field comparison (matched / missed / wrong / hallucinated).
 7. **Review and hardening (Oct 22).**
    - *Validation logic:*
