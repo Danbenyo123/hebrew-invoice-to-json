@@ -64,7 +64,7 @@
         "phone": null,
         "address": "רחוב הרצל 54, תל אביב, 523367"
       },
-      "verified": false,
+      "verified": true,
       "notes": "supplier name changed from the subtitle to the business name; id changed from int to string"
     },
     "04.jpg": {
@@ -208,7 +208,7 @@
       "rounding": 0.66,
       "price_before_VAT": 28497.84,
       "vat_amount": 4417.16,
-      "discount": 0.0,
+      "discount": null,
       "total_price": 32915.0,
       "supplier": {
         "id": "023042146",
@@ -222,7 +222,7 @@
         "phone": null,
         "address": "המעיין 53 כניסה ב', ת\"א"
       },
-      "verified": false,
+      "verified": true,
       "notes": "low resolution (370px wide). rounding is 'הנחת עיגול 0.66'; supplier also has a mobile number 052-5705024"
     },
     "07.png": {
@@ -244,7 +244,7 @@
       "rounding": null,
       "price_before_VAT": 31000.0,
       "vat_amount": 5270.0,
-      "discount": 0.0,
+      "discount": null,
       "total_price": 36270.0,
       "supplier": null,
       "customer": {
@@ -253,7 +253,7 @@
         "phone": null,
         "address": null
       },
-      "verified": false,
+      "verified": true,
       "notes": "supplier and most customer details are blurred on the image"
     },
     "08-empty.jpg": {
@@ -285,7 +285,7 @@
       },
       "customer": null,
       "expect_failure": true,
-      "verified": false,
+      "verified": true,
       "notes": "blank printed template with one handwritten line and no number, date or prices; should fail validation"
     },
     "09.png": {
@@ -321,7 +321,7 @@
         "phone": null,
         "address": null
       },
-      "verified": false,
+      "verified": true,
       "notes": "low resolution (464px wide). 'סה\"כ ביניים' 1,000.00 is a subtotal, not a before-rounding price, so price_before_rounding is null"
     },
     "10.jpg": {
@@ -373,7 +373,7 @@
         "phone": null,
         "address": null
       },
-      "verified": false,
+      "verified": true,
       "notes": "'עבודות שיפוץ בדירה ברח' הרצל 25, תל אביב' under the customer is a job description, so customer address is null; 09:55 is the generation time on the stamp, so hour is null"
     },
     "11.jpg": {
@@ -441,7 +441,7 @@
         "phone": null,
         "address": null
       },
-      "verified": false,
+      "verified": true,
       "notes": "phone photo of a printed receipt. document type isn't printed, so type_of_doc is null. customer id follows 01's convention (customer number)"
     },
     "12-no-price.jpg": {
@@ -478,7 +478,7 @@
         "address": null
       },
       "expect_failure": true,
-      "verified": false,
+      "verified": true,
       "notes": "same document as 01 with the total to pay removed; should fail validation and must not invent a total"
     }
   }

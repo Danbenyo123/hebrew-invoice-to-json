@@ -4,8 +4,6 @@ Last updated 2026-10-22.
 
 ## Evaluation
 
-- [ ] Verify the draft labels (`"verified": false` in `eval/dataset/expected_results.json`): `02.png` (supplier name and id fixed) and `06`–`12`. Each draft has a `notes` field explaining the judgment calls. Set `"verified": true` once checked.
-- [ ] Decide the `customer.id` convention: `01`/`12` label the customer *number* (`666`) as the customer id, but neither pipeline reads it that way. Either relabel as null or add a field description to the schema.
 - [ ] Add more pipelines, for example Gemini vision or OCR with a smaller Claude model (add a function to `eval/pipelines.py`).
 - [ ] Report cost in money, not just tokens.
 

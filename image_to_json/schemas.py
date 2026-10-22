@@ -67,7 +67,7 @@ class DocumentType(StrEnum):
     PAYMENT_DEMAND = "דרישת תשלום"
 
 class Party(BaseModel):
-    id: str | None = Field(None, description="id number of party,usually written before:'ת.ז' or 'ח.פ' or 'עוסק פטור' or 'עוסק מורשה'")
+    id: str | None = Field(None, description="id number of party,usually written before:'ת.ז' or 'ח.פ' or 'עוסק פטור' or 'עוסק מורשה'. for the customer, a customer number ('מספר לקוח') also counts as id")
     name: str | None = None
     phone: str | None = None
     address: str | None = None
@@ -77,7 +77,7 @@ class Product(BaseModel):
     name: str | None = None
     quantity: Decimal | None = None
     price_for_unit: CleanPrice | None = None
-    discount: CleanPrice | None = Field(None,description="Discount, usually written under the column 'הנחה'. this is a discount for a specific item, unlike other discount that is for the entire product.")
+    discount: CleanPrice | None = Field(None,description="Discount, usually written under the column 'הנחה'. this is a discount for a specific item, unlike other discount that is for the entire product. null when the discount is 0.")
     product_total_price: CleanPrice | None
 
 class Invoice(BaseModel):
@@ -90,7 +90,7 @@ class Invoice(BaseModel):
     rounding: CleanPrice | None
     price_before_VAT: CleanPrice | None
     vat_amount: CleanPrice | None
-    discount: CleanPrice | None = Field(None, description="Discount on whole invoice, near the totals")
+    discount: CleanPrice | None = Field(None, description="Discount on whole invoice, near the totals. null when the discount is 0.")
     total_price: CleanPrice | None
     supplier: Party | None = Field(None, description="business that issued the invoice, usually in the header/logo area")
     customer: Party | None = Field(None, description="the billed party, usually after 'לכבוד'")
