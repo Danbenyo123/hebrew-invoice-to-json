@@ -1,0 +1,187 @@
+{
+  "invoices": {
+    "01.jpg": {
+      "date": "18/07/2011",
+      "hour": "15:41:14",
+      "type_of_doc":"חשבונית",
+      "id": "66621",
+      "products": [
+        {
+        "id": "666",
+        "name": "שישיית קולה",
+        "quantity": 6,
+        "price_for_unit": 33.98,
+        "product_total_price": 203.88
+        }
+      ],
+      "price_before_rounding": 203.88,
+      "rounding": -0.43,
+      "price_before_VAT": 204.31,
+      "vat_amount": 32.69,
+      "total_price": 237.0,
+      "supplier": {
+        "id": null,
+        "name": "קריאטיב סופטוור בע״מ",
+        "phone": "1-599-505019",
+        "address": "ת.ד. 221 זכרון יעקב 30900"
+      },
+      "customer": {
+        "id": "666",
+        "name": "בדיקות ורסיה",
+        "phone": null,
+        "address": null
+      }
+    },
+    "02.png": {
+      "date": "27/05/19",
+      "hour": null,
+      "type_of_doc":"חשבונית",
+      "id": 70581,
+      "products": [
+        {
+        "id": "3334456",
+        "name": "עיצוב תבנית לחשבונית",
+        "quantity": 1,
+        "price_for_unit": 1132.0,
+        "product_total_price": 1132.0
+        }
+      ],
+      "price_before_rounding": 1132.0,
+      "rounding": 0.08,
+      "price_before_VAT": null,
+      "vat_amount": null,
+      "total_price": 1632.0,
+      "supplier": {
+        "id": "034568234",
+        "name": "כותרת משנה לדוגמה",
+        "phone": "03-5709274",
+        "address": null
+      },
+      "customer": {
+        "id": "32123131",
+        "name": "ברק חברה לפיתוח",
+        "phone": null,
+        "address": "רחוב הרצל 54, תל אביב, 523367"
+      }
+    },
+    "04.jpg": {
+      "date": "01/12/21",
+      "hour": "10:35",
+      "type_of_doc": "חשבונית",
+      "id": "02/000001",
+      "products": [
+        {
+        "id": "4",
+        "name": "כיסא משרדי דגם פריז אפור",
+        "quantity": 1,
+        "price_for_unit": 660.0,
+        "product_total_price": 660.0
+        },
+        {
+        "id": "5",
+        "name": "שולחן מרובע דגם אלסקה",
+        "quantity": 1,
+        "price_for_unit": 2600.0,
+        "product_total_price": 2600.0
+        },
+        {
+        "id": "2",
+        "name": "שולחן עגול דגם קנדה",
+        "quantity": 1,
+        "price_for_unit": 2560.0,
+        "product_total_price": 2560.0
+        },
+        {
+        "id": "3",
+        "name": "שידה דגם אטלנטה",
+        "quantity": 1,
+        "price_for_unit": 780.0,
+        "product_total_price": 780.0
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": 6600.0,
+      "vat_amount": 1122.0,
+      "total_price": 7722.0,
+      "supplier": {
+        "id": "305288508",
+        "name": "עסק לניסיון",
+        "phone": null,
+        "address": "ראשוני הראשונים, 1 ראשון לציון"
+      },
+      "customer": {
+        "id": "00000000-0",
+        "name": "ישראל שם טוב",
+        "phone": "050 77774852",
+        "address": "חשמונאים 16 הרצליה"
+      }
+    },
+    "05-no-id.png": {
+      "date": "23/12/2024",
+      "hour": null,
+      "type_of_doc": "חשבונית",
+      "id": "10907934932",
+      "products": [
+        {
+          "id": null,
+          "name": "החל מ- 06/05/2024",
+          "quantity": null,
+          "price_for_unit": 200.69,
+          "product_total_price": 200.69
+        },
+        {
+          "id": null,
+          "name": "הנחת שימור",
+          "quantity": null,
+          "price_for_unit": null,
+          "discount": -90.77,
+          "product_total_price": -90.77
+        },
+        {
+          "id": null,
+          "name": "ממיר yes+ AndroidTV החל מ07/11/2022",
+          "quantity": null,
+          "price_for_unit": 19.16,
+          "discount": -19.16,
+          "product_total_price": 0.0
+        },
+        {
+          "id": null,
+          "name": "ממיר yes+ AndroidTV החל מ07/11/2022",
+          "quantity": null,
+          "price_for_unit": 19.16,
+          "discount": -19.16,
+          "product_total_price": 0.0
+        },
+        {
+          "id": null,
+          "name": "ממיר yes+ AndroidTV החל מ03/01/2024",
+          "quantity": null,
+          "price_for_unit": 51.24,
+          "discount": -51.24,
+          "product_total_price": 0.0
+        },
+        {
+          "id": null,
+          "name": "ממיר yes+ AndroidTV החל מ02/01/2022",
+          "quantity": null,
+          "price_for_unit": 19.16,
+          "discount": -9.07,
+          "product_total_price": 10.09
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": 101.71,
+      "vat_amount": 18.30,
+      "total_price": 120.01,
+      "supplier": {
+        "id": "512705138",
+        "name": null,
+        "phone": null,
+        "address": null
+      }
+    }
+  }
+}

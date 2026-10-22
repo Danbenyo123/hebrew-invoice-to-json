@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hebrew Invoice to JSON</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="upload.js" defer></script>
+</head>
+<body>
+<header>
+    <h1>Hebrew Invoice &rarr; JSON</h1>
+    <p class="subtitle">OpenCV preprocessing &rarr; Tesseract OCR (Hebrew + English) &rarr; Claude structured extraction &rarr; validation</p>
+</header>
+
+<main>
+    <section class="card" id="input_card">
+        <h2>1. Choose an invoice</h2>
+        <form id="submit_form" name="submit_form">
+            <label for="image_upload">Upload an image of a Hebrew invoice or receipt</label>
+            <div class="row">
+                <input type="file" id="image_upload" name="image_upload" accept="image/png, image/jpeg"/>
+                <button id="send" name="send" type="button" disabled>Extract</button>
+            </div>
+        </form>
+        <p class="hint">or try a sample:</p>
+        <div id="samples" class="samples"></div>
+    </section>
+
+    <section id="status" class="status" hidden></section>
+
+    <section id="results" hidden>
+        <section class="card">
+            <h2>2. Pipeline</h2>
+            <div class="pipeline">
+                <figure>
+                    <figcaption>Original</figcaption>
+                    <img id="original_image" alt="Original invoice">
+                </figure>
+                <figure>
+                    <figcaption>Preprocessed (deskew, denoise, invert colored blocks, binarize, remove lines)</figcaption>
+                    <img id="preprocessed_image" alt="Preprocessed invoice">
+                </figure>
+                <figure>
+                    <figcaption>OCR text (layout reconstructed right-to-left)</figcaption>
+                    <pre id="ocr_text" dir="rtl"></pre>
+                </figure>
+            </div>
+        </section>
+
+        <section class="card" id="invoice_card">
+            <h2>3. Extracted invoice</h2>
+            <div id="invoice_view"></div>
+            <details>
+                <summary>Raw JSON response</summary>
+                <pre id="json_response"></pre>
+            </details>
+        </section>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,27 @@
+[project]
+name = "genpact"
+version = "0.1.0"
+description = "fastAPI -> tesseract OCR for uploading receipts images into json files"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "anthropic>=1.3.0",
+    "fastapi[standard]>=0.141.1",
+    "opencv-python>=5.0.0.93",
+    "pillow>=12.3.0",
+    "pydantic>=2.13.5",
+    "pytesseract>=0.3.13",
+    "python-dotenv>=1.2.3",
+    "python-multipart>=0.0.32",
+]
+[tool.fastapi]
+entrypoint = "api.api:app"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
