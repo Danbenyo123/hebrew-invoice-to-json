@@ -74,6 +74,27 @@ The response has these fields:
 - `raw_text`: the reconstructed OCR text.
 - `preprocessed_image`: the preprocessed image as a data URL.
 
+## Evaluation
+
+A CLI compares extraction pipelines on a labeled dataset of Hebrew invoices, measuring both accuracy and consistency:
+
+```bash
+uv run python -m eval run --pipelines ocr-claude,claude-vision --runs 3   # call the pipelines, save raw results
+uv run python -m eval report                                             # re-score the latest saved run, no API calls
+```
+
+- **Pipelines:**
+  - `ocr-claude` is this project's pipeline: preprocessing, OCR, extraction, validation and retry.
+  - `claude-vision` sends the image straight to the same Claude model in one call, which shows what the OCR stage adds.
+- **Accuracy:** every field is scored as correct, missed, wrong or hallucinated.
+  - Line items are matched one to one.
+  - Hebrew quotation marks, spaces and number formats are normalized.
+  - The total is weighted toward the invoice number, the total and the line items.
+- **Honest failures:** a blank template and an invoice with the total removed should fail validation, not get invented values.
+- **Consistency:** repeated runs on the same invoice are compared field by field.
+
+The latest results are in [eval/REPORT.md](eval/REPORT.md).
+
 ## Tests
 
 ```bash
@@ -85,6 +106,7 @@ The unit tests mock the LLM. They cover:
 - How the prompt is built.
 - The OCR number merge rules.
 - The API status codes.
+- The eval scoring: normalization, line-item matching, weights, consistency, and rendering the report from a saved run.
 
 ## Project structure
 
@@ -97,7 +119,12 @@ image_to_json/
   schemas.py              Pydantic invoice schema and value parsers
   main.py                 image bytes -> ExtractionResult
 frontend/                 index.html, upload.js, style.css
-eval/                     labeled dataset + evaluation harness (work in progress)
+eval/
+  __main__.py             evaluation CLI (run / report)
+  pipelines.py            pipelines under comparison
+  scoring.py              field-level scoring and consistency
+  report.py               terminal tables and REPORT.md
+  dataset/                invoice images + labels
 invoices/                 robustness variants (skewed, noised, numbers-only, missing price)
 tests/                    unit tests
 ```
@@ -131,4 +158,6 @@ The project was built step by step, testing each stage on real Hebrew invoices a
    - *Hallucination guard:* when the total was missing, the retry pushed the model to fill it with the rounding amount (`0.08` on a ₪1,632 invoice). The retry prompt now forbids borrowing values from other fields, so a missing total fails validation honestly.
    - *Demo:* FastAPI now serves the UI and sample invoices on one port, and the UI shows every pipeline stage.
 
-The remaining limitations and next steps are tracked in [TODO.md](TODO.md). The main open item is finishing the evaluation harness to get per-field accuracy numbers.
+8. **Evaluation CLI (Oct 22).** Rebuilt the half-finished evaluation script into a CLI that compares pipelines on accuracy and consistency, saves raw runs so they can be re-scored for free, and writes a report. Labels now cover every invoice in the dataset.
+
+The remaining limitations and next steps are tracked in [TODO.md](TODO.md).

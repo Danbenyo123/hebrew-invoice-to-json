@@ -13,12 +13,18 @@ MODEL = "claude-opus-5"
 MAX_TOKENS = 8192
 
 REQUIRED_FIELDS = ("id","total_price")
+EXTRACTION_RULES = "never calculate, infer, or reconcile a value that isn't legible on the page; emit None instead in the field."
 
-def prompt_llm(ocr_text,output_scheme,previous_json,problems):
+def add_usage(usage: dict | None, response) -> None:
+    if usage is not None:
+        usage["input_tokens"] += response.usage.input_tokens
+        usage["output_tokens"] += response.usage.output_tokens
+
+def prompt_llm(ocr_text,output_scheme,previous_json,problems,usage=None):
     checks = "\n".join(f"- {p}" for p in problems)
     prompt = f"""
                 this is OCR hebrew text from an Israeli tax invoice/receipt, reconstructed for RTL reading order, and it may contains recognition errors.
-                never calculate, infer, or reconcile a value that isn't legible on the page; emit None instead in the field.
+                {EXTRACTION_RULES}
                 the amount sits to the left of its label except from tables and columns.
                 <ocr_text>
                 {ocr_text}
@@ -52,6 +58,7 @@ def prompt_llm(ocr_text,output_scheme,previous_json,problems):
         ],
         output_format=output_scheme
     )
+    add_usage(usage, response)
     return response.parsed_output
 
 class ExtractionResult(BaseModel):
@@ -63,6 +70,8 @@ class ExtractionResult(BaseModel):
     attempts: int = 1
     raw_text: str | None = None
     preprocessed_image: str | None = Field(None, description="preprocessed image as a base64 PNG data URL, for display")
+    input_tokens: int = 0
+    output_tokens: int = 0
     @property
     def ok(self) -> bool:
         return self.invoice is not None and not self.errors
@@ -94,6 +103,12 @@ def check_arithmetic(inv:Invoice) -> list[str]:
     return problems
 
 def extract(ocr_text: str, max_attempts: int = 2) -> ExtractionResult:
+    usage = {"input_tokens": 0, "output_tokens": 0}
+    result = _extract(ocr_text, max_attempts, usage)
+    result.input_tokens, result.output_tokens = usage["input_tokens"], usage["output_tokens"]
+    return result
+
+def _extract(ocr_text: str, max_attempts: int, usage: dict) -> ExtractionResult:
     previous_json = None
     problems: list[str] = []
     for attempt in range(1,max_attempts + 1):
@@ -102,7 +117,8 @@ def extract(ocr_text: str, max_attempts: int = 2) -> ExtractionResult:
                 ocr_text,
                 Invoice,
                 previous_json=previous_json,
-                problems=problems
+                problems=problems,
+                usage=usage
             )
         except ValidationError as e:
             if attempt == max_attempts:

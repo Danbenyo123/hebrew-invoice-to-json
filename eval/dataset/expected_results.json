@@ -3,15 +3,15 @@
     "01.jpg": {
       "date": "18/07/2011",
       "hour": "15:41:14",
-      "type_of_doc":"חשבונית",
+      "type_of_doc": "חשבונית",
       "id": "66621",
       "products": [
         {
-        "id": "666",
-        "name": "שישיית קולה",
-        "quantity": 6,
-        "price_for_unit": 33.98,
-        "product_total_price": 203.88
+          "id": "666",
+          "name": "שישיית קולה",
+          "quantity": 6,
+          "price_for_unit": 33.98,
+          "product_total_price": 203.88
         }
       ],
       "price_before_rounding": 203.88,
@@ -30,20 +30,21 @@
         "name": "בדיקות ורסיה",
         "phone": null,
         "address": null
-      }
+      },
+      "verified": true
     },
     "02.png": {
       "date": "27/05/19",
       "hour": null,
-      "type_of_doc":"חשבונית",
-      "id": 70581,
+      "type_of_doc": "חשבונית",
+      "id": "70581",
       "products": [
         {
-        "id": "3334456",
-        "name": "עיצוב תבנית לחשבונית",
-        "quantity": 1,
-        "price_for_unit": 1132.0,
-        "product_total_price": 1132.0
+          "id": "3334456",
+          "name": "עיצוב תבנית לחשבונית",
+          "quantity": 1,
+          "price_for_unit": 1132.0,
+          "product_total_price": 1132.0
         }
       ],
       "price_before_rounding": 1132.0,
@@ -53,7 +54,7 @@
       "total_price": 1632.0,
       "supplier": {
         "id": "034568234",
-        "name": "כותרת משנה לדוגמה",
+        "name": "אינטרסרף - חברה לבדיקה",
         "phone": "03-5709274",
         "address": null
       },
@@ -62,7 +63,9 @@
         "name": "ברק חברה לפיתוח",
         "phone": null,
         "address": "רחוב הרצל 54, תל אביב, 523367"
-      }
+      },
+      "verified": false,
+      "notes": "supplier name changed from the subtitle to the business name; id changed from int to string"
     },
     "04.jpg": {
       "date": "01/12/21",
@@ -71,32 +74,32 @@
       "id": "02/000001",
       "products": [
         {
-        "id": "4",
-        "name": "כיסא משרדי דגם פריז אפור",
-        "quantity": 1,
-        "price_for_unit": 660.0,
-        "product_total_price": 660.0
+          "id": "4",
+          "name": "כיסא משרדי דגם פריז אפור",
+          "quantity": 1,
+          "price_for_unit": 660.0,
+          "product_total_price": 660.0
         },
         {
-        "id": "5",
-        "name": "שולחן מרובע דגם אלסקה",
-        "quantity": 1,
-        "price_for_unit": 2600.0,
-        "product_total_price": 2600.0
+          "id": "5",
+          "name": "שולחן מרובע דגם אלסקה",
+          "quantity": 1,
+          "price_for_unit": 2600.0,
+          "product_total_price": 2600.0
         },
         {
-        "id": "2",
-        "name": "שולחן עגול דגם קנדה",
-        "quantity": 1,
-        "price_for_unit": 2560.0,
-        "product_total_price": 2560.0
+          "id": "2",
+          "name": "שולחן עגול דגם קנדה",
+          "quantity": 1,
+          "price_for_unit": 2560.0,
+          "product_total_price": 2560.0
         },
         {
-        "id": "3",
-        "name": "שידה דגם אטלנטה",
-        "quantity": 1,
-        "price_for_unit": 780.0,
-        "product_total_price": 780.0
+          "id": "3",
+          "name": "שידה דגם אטלנטה",
+          "quantity": 1,
+          "price_for_unit": 780.0,
+          "product_total_price": 780.0
         }
       ],
       "price_before_rounding": null,
@@ -115,7 +118,8 @@
         "name": "ישראל שם טוב",
         "phone": "050 77774852",
         "address": "חשמונאים 16 הרצליה"
-      }
+      },
+      "verified": true
     },
     "05-no-id.png": {
       "date": "23/12/2024",
@@ -174,14 +178,308 @@
       "price_before_rounding": null,
       "rounding": null,
       "price_before_VAT": 101.71,
-      "vat_amount": 18.30,
+      "vat_amount": 18.3,
       "total_price": 120.01,
       "supplier": {
         "id": "512705138",
         "name": null,
         "phone": null,
         "address": null
-      }
+      },
+      "verified": true,
+      "notes": "customer details are redacted on the image, so customer is null"
+    },
+    "06.png": {
+      "date": "10/02/2009",
+      "hour": null,
+      "type_of_doc": "חשבונית",
+      "id": "000003",
+      "products": [
+        {
+          "id": null,
+          "name": "רדיו-טייפ טושיבה Gur",
+          "quantity": 150.0,
+          "price_for_unit": 189.99,
+          "discount": null,
+          "product_total_price": 28498.5
+        }
+      ],
+      "price_before_rounding": 28498.5,
+      "rounding": 0.66,
+      "price_before_VAT": 28497.84,
+      "vat_amount": 4417.16,
+      "discount": 0.0,
+      "total_price": 32915.0,
+      "supplier": {
+        "id": "023042146",
+        "name": "בדיקות בע\"מ",
+        "phone": "03-6743068",
+        "address": "ת.ד 1416 ר\"ג 52106"
+      },
+      "customer": {
+        "id": null,
+        "name": "שושן צחור בע\"מ",
+        "phone": null,
+        "address": "המעיין 53 כניסה ב', ת\"א"
+      },
+      "verified": false,
+      "notes": "low resolution (370px wide). rounding is 'הנחת עיגול 0.66'; supplier also has a mobile number 052-5705024"
+    },
+    "07.png": {
+      "date": "13/02/2024",
+      "hour": "11:31",
+      "type_of_doc": "חשבונית",
+      "id": "01/000046",
+      "products": [
+        {
+          "id": "1285786",
+          "name": "בדיקה",
+          "quantity": 1.0,
+          "price_for_unit": 31000.0,
+          "discount": null,
+          "product_total_price": 31000.0
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": 31000.0,
+      "vat_amount": 5270.0,
+      "discount": 0.0,
+      "total_price": 36270.0,
+      "supplier": null,
+      "customer": {
+        "id": null,
+        "name": "בדיקה",
+        "phone": null,
+        "address": null
+      },
+      "verified": false,
+      "notes": "supplier and most customer details are blurred on the image"
+    },
+    "08-empty.jpg": {
+      "date": null,
+      "hour": null,
+      "type_of_doc": "חשבונית",
+      "id": null,
+      "products": [
+        {
+          "id": null,
+          "name": "נייר כימי 90 גר' עבה במיוחד!",
+          "quantity": null,
+          "price_for_unit": null,
+          "discount": null,
+          "product_total_price": null
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": null,
+      "vat_amount": null,
+      "discount": null,
+      "total_price": null,
+      "supplier": {
+        "id": "0123456789",
+        "name": "ספידגרף",
+        "phone": "03-5100157",
+        "address": "אחד העם 3, תל אביב 65142"
+      },
+      "customer": null,
+      "expect_failure": true,
+      "verified": false,
+      "notes": "blank printed template with one handwritten line and no number, date or prices; should fail validation"
+    },
+    "09.png": {
+      "date": "01/01/2011",
+      "hour": null,
+      "type_of_doc": "חשבונית",
+      "id": "10004",
+      "products": [
+        {
+          "id": null,
+          "name": "שכירות חודש 12/2010",
+          "quantity": 1.0,
+          "price_for_unit": 1000.0,
+          "discount": null,
+          "product_total_price": 1000.0
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": 1000.0,
+      "vat_amount": 160.0,
+      "discount": null,
+      "total_price": 1160.0,
+      "supplier": {
+        "id": "123456789",
+        "name": "העסק המושלם",
+        "phone": "077-1234567",
+        "address": "הרחוב שלי, הישוב שלי 12345"
+      },
+      "customer": {
+        "id": "123456789",
+        "name": "העסק המושלם",
+        "phone": null,
+        "address": null
+      },
+      "verified": false,
+      "notes": "low resolution (464px wide). 'סה\"כ ביניים' 1,000.00 is a subtotal, not a before-rounding price, so price_before_rounding is null"
+    },
+    "10.jpg": {
+      "date": "10/08/2026",
+      "hour": null,
+      "type_of_doc": "חשבונית",
+      "id": "30002",
+      "products": [
+        {
+          "id": null,
+          "name": "עבודות הריסה ופינוי פסולת",
+          "quantity": 1.0,
+          "price_for_unit": 4500.0,
+          "discount": null,
+          "product_total_price": 4500.0
+        },
+        {
+          "id": null,
+          "name": "עבודות גבס ותיקוני טיח",
+          "quantity": 1.0,
+          "price_for_unit": 6800.0,
+          "discount": null,
+          "product_total_price": 6800.0
+        },
+        {
+          "id": null,
+          "name": "עבודות צבע",
+          "quantity": 1.0,
+          "price_for_unit": 5200.0,
+          "discount": null,
+          "product_total_price": 5200.0
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": 16500.0,
+      "vat_amount": 2970.0,
+      "discount": null,
+      "total_price": 19470.0,
+      "supplier": {
+        "id": "304886229",
+        "name": "שם החברה בע\"מ",
+        "phone": "0521234567",
+        "address": "משכית 5, הרצליה, ישראל"
+      },
+      "customer": {
+        "id": null,
+        "name": "ישראל לוי",
+        "phone": null,
+        "address": null
+      },
+      "verified": false,
+      "notes": "'עבודות שיפוץ בדירה ברח' הרצל 25, תל אביב' under the customer is a job description, so customer address is null; 09:55 is the generation time on the stamp, so hour is null"
+    },
+    "11.jpg": {
+      "date": "30/09/2013",
+      "hour": "11:57",
+      "type_of_doc": null,
+      "id": "1010226",
+      "products": [
+        {
+          "id": null,
+          "name": "לחם פרוס",
+          "quantity": 1.0,
+          "price_for_unit": 7.67,
+          "discount": null,
+          "product_total_price": 7.67
+        },
+        {
+          "id": null,
+          "name": "עוגיות של אקלר",
+          "quantity": 1.0,
+          "price_for_unit": 24.9,
+          "discount": null,
+          "product_total_price": 24.9
+        },
+        {
+          "id": null,
+          "name": "חלב טרה בקרטון",
+          "quantity": 2.0,
+          "price_for_unit": 6.54,
+          "discount": null,
+          "product_total_price": 13.08
+        },
+        {
+          "id": null,
+          "name": "קוטג' 9% תנובה",
+          "quantity": 1.0,
+          "price_for_unit": 6.9,
+          "discount": null,
+          "product_total_price": 6.9
+        },
+        {
+          "id": null,
+          "name": "מילקי קל",
+          "quantity": 2.0,
+          "price_for_unit": 3.95,
+          "discount": null,
+          "product_total_price": 7.9
+        }
+      ],
+      "price_before_rounding": null,
+      "rounding": null,
+      "price_before_VAT": null,
+      "vat_amount": 9.22,
+      "discount": -0.05,
+      "total_price": 60.5,
+      "supplier": {
+        "id": "023734494",
+        "name": "מינימרקט אבי",
+        "phone": "03-6745186",
+        "address": "שרה אהרונסון 16 רמת גן"
+      },
+      "customer": {
+        "id": "9999",
+        "name": "לקוח יקר",
+        "phone": null,
+        "address": null
+      },
+      "verified": false,
+      "notes": "phone photo of a printed receipt. document type isn't printed, so type_of_doc is null. customer id follows 01's convention (customer number)"
+    },
+    "12-no-price.jpg": {
+      "date": "18/07/2011",
+      "hour": "15:41:14",
+      "type_of_doc": "חשבונית",
+      "id": "66621",
+      "products": [
+        {
+          "id": "666",
+          "name": "שישיית קולה",
+          "quantity": 6.0,
+          "price_for_unit": 33.98,
+          "discount": null,
+          "product_total_price": 203.88
+        }
+      ],
+      "price_before_rounding": 203.88,
+      "rounding": -0.43,
+      "price_before_VAT": 204.31,
+      "vat_amount": 32.69,
+      "discount": null,
+      "total_price": null,
+      "supplier": {
+        "id": null,
+        "name": "קריאטיב סופטוור בע\"מ",
+        "phone": "1-599-505019",
+        "address": "ת.ד. 221 זכרון יעקב 30900"
+      },
+      "customer": {
+        "id": "666",
+        "name": "בדיקות ורסיה",
+        "phone": null,
+        "address": null
+      },
+      "expect_failure": true,
+      "verified": false,
+      "notes": "same document as 01 with the total to pay removed; should fail validation and must not invent a total"
     }
   }
 }

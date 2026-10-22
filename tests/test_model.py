@@ -29,7 +29,7 @@ def schema_error():
 
 def run(responses, **kw):
     calls = []
-    def fake(ocr, scheme, previous_json, problems):
+    def fake(ocr, scheme, previous_json, problems, usage=None):
         calls.append(dict(previous_json=previous_json, problems=list(problems)))
         r = responses.pop(0)
         if isinstance(r, Exception):
@@ -124,7 +124,7 @@ def test_single_attempt():
 
 # --- prompt construction ---
 def capture_prompt(previous_json, problems):
-    resp = mock.Mock(parsed_output=inv())
+    resp = mock.Mock(parsed_output=inv(), usage=mock.Mock(input_tokens=10, output_tokens=5))
     with mock.patch.object(model.client.messages, "parse", return_value=resp) as p:
         model.prompt_llm("TEXT", Invoice, previous_json, problems)
     return p.call_args.kwargs["messages"][0]["content"]
