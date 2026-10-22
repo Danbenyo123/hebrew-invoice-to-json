@@ -10,3 +10,4 @@ temp/
 # real invoices with personal data
 eval/dataset/03.jpg
 invoices/green_invoice.jpg
+eval/dataset/expected_results.private.json
