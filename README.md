@@ -4,6 +4,8 @@ Upload a photo or scan of an Israeli invoice or receipt and get back validated, 
 
 The pipeline combines classic computer vision (OpenCV + Tesseract OCR) with an LLM (Claude) for structured extraction. The model only reads text that the OCR actually found and is instructed never to calculate or guess missing values. Its output is validated, and failed checks go back to the model for one retry.
 
+The project also includes an evaluation CLI that measured this pipeline against a simple baseline: the same model reading the image directly. **The baseline wins, 87% vs 71%.** [Results](#results-the-ocr-pipeline-vs-the-vision-baseline) explains why, with the data, and what to do about it.
+
 ![Pipeline view: original, preprocessed image and reconstructed OCR text](docs/screenshots/pipeline.jpg)
 ![Extracted invoice: header, parties, line items and totals](docs/screenshots/extracted_invoice.jpg)
 
@@ -94,6 +96,79 @@ uv run python -m eval report                                             # re-sc
 - **Consistency:** repeated runs on the same invoice are compared field by field.
 
 The latest results are in [eval/REPORT.md](eval/REPORT.md).
+
+## Results: the OCR pipeline vs the vision baseline
+
+11 hand-labeled Hebrew invoices, 3 runs each, same model (`claude-opus-5`) for both pipelines:
+
+| | OCR pipeline (`ocr-claude`) | Vision baseline (`claude-vision`) |
+|---|---|---|
+| Weighted score | 71% | **87%** |
+| Fields missed | 20% | **1%** |
+| Fields wrong | 12% | 10% |
+| Fields invented (hallucinated) | 2% | 2% |
+| Honest failures (blank template, missing total) | 6/6 | 6/6 |
+| Consistency across runs | 95% | 95% |
+| Average time | 9.6s | **6.9s** |
+| Average input tokens | 4,822 | **4,212** |
+
+The baseline is more accurate, faster and cheaper. Both pipelines are equally consistent, and neither invents data on invoices that should fail.
+
+### Where the gap is
+
+The two pipelines tie on clean, computer-generated invoices. The whole gap comes from harder inputs:
+
+| Invoice | Kind | OCR pipeline | Vision baseline |
+|---|---|---|---|
+| `01.jpg` | clean digital | 100% | 97% |
+| `04.jpg` | clean digital | 95% | 94% |
+| `10.jpg` | clean digital | 93% | 95% |
+| `02.png` | colored template | 86% | 95% |
+| `07.png` | partly blurred scan | 68% | 95% |
+| `09.png` | low resolution (464px) | 63% | 82% |
+| `06.png` | low resolution (370px) | 47% | 73% |
+| `11.jpg` | phone photo of a receipt | **10%** | **96%** |
+
+### Why it loses
+
+These explanations fit the data, but they aren't proven yet. The experiments under the next heading would test them.
+
+1. **OCR mistakes can't be undone later.** The LLM in the OCR pipeline sees only Tesseract's text, so anything OCR misreads or drops is lost. That shows up as missing data, not wrong data: the OCR pipeline misses 20% of fields, the baseline 1%. Concrete cases found while building:
+   - Tesseract's Hebrew model reads formatted amounts like `1,132.00` as `0`.
+   - A `₪` sign glued to the digits turns the amount into `0`.
+   - Bold white digits in a colored header come out as `4`.
+
+   The retry can't help, because it re-reads the same broken text. The baseline makes one call with no retry and still wins.
+2. **Preprocessing was tuned on clean scans.** Denoising, binarization, line removal and color inversion each fix one kind of problem but damage text elsewhere. A change that made `02.png` readable broke the totals on another invoice. Photos (shadows, curved paper) and tiny images fall outside what the rules were tuned for: `11.jpg` drops to 10%, and `06`/`09` to 47–63%.
+3. **Table structure is flattened.** The layout reconstruction estimates columns from character widths and turns the page into lines of text, so the model has to guess which number belongs to which label. The vision model sees the table directly. The fields that depend on layout show the biggest gaps:
+
+   | Field | OCR pipeline | Vision baseline |
+   |---|---|---|
+   | VAT amount | 44% | 100% |
+   | line item totals | 64% | 100% |
+   | unit prices | 71% | 100% |
+   | invoice total | 78% | 100% |
+
+4. **A weaker reader sits in front of a stronger one.** Tesseract's Hebrew model is much weaker than the vision model's own reading of the page.
+
+**Where OCR still helps:** it extracts supplier names better (89% vs 66%), because it copies exact characters instead of reading styled header text. It also keeps a text trail: every value can be traced back to OCR text, which helps with audits.
+
+### How to fix it
+
+Ordered by expected value. Each one can be measured with the eval CLI.
+
+1. **Confirm the causes.**
+   - Run the vision baseline on the *preprocessed* image. If its score drops, preprocessing is destroying information.
+   - Compare against the vision baseline on the original image to see how much is lost in the OCR text itself.
+2. **Hybrid pipeline.** Send the model the image *and* the OCR text in one call. The image provides layout and robustness, and the OCR text provides exact characters where OCR is strong (names, IDs). This is the most likely way to beat both pipelines.
+3. **Route by input quality.** Send phone photos and low-resolution images to the vision path, and clean digital documents to whichever path is cheaper.
+4. **Fix the OCR stage where it's cheap:**
+   - Skip binarization for photos.
+   - Handle a `₪` glued to the digits.
+   - Reject or warn on images below a minimum resolution.
+   - Try a stronger OCR engine.
+5. **Ship the winner.** The API should use whichever pipeline the eval ranks first (currently the vision baseline) and keep OCR as an optional text trail.
+6. **Grow the dataset.** 11 invoices and one model is a small sample, so more invoices, especially photos, would make these numbers more reliable.
 
 ## Tests
 

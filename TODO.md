@@ -4,6 +4,10 @@ Last updated 2026-10-22.
 
 ## Evaluation
 
+- [ ] Run the vision baseline on the preprocessed image to test whether preprocessing destroys information (see README → Results → How to fix it).
+- [ ] Add a hybrid pipeline: image and OCR text in one call.
+- [ ] Route by input quality: photos and low-resolution images go to the vision path.
+- [ ] Switch the API to whichever pipeline the eval ranks first.
 - [ ] Add more pipelines, for example Gemini vision or OCR with a smaller Claude model (add a function to `eval/pipelines.py`).
 - [ ] Report cost in money, not just tokens.
 
